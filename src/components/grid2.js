@@ -27,9 +27,9 @@ class Grid extends React.Component {
       <div>
         <h3>Tic Tac Toe! Grid</h3>
         <div style={gridStyle}>
-          { this.gridState.tiles.map(function(){
+          { this.gridState.tiles.map(function(tile, index){
             return(
-            <Tile/>
+            <Tile key={index}/>
           );
           }, this) }
         </div>

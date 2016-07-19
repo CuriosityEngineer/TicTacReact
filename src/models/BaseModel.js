@@ -1,6 +1,6 @@
 import SocketClient from 'socket.io-client';
 import Feathers from 'feathers-client';
-// import Utils from '../lib/Utils';
+import Utils from '../lib/Utils';
 
 const API_HOST = "http://localhost:3030";
 
