@@ -5,6 +5,7 @@ import Tile from '../components/tile';
 
 const gridStyle = {
   border: '3px solid red',
+  overflow:'hidden',
   width: 470,
   textAlign: 'center',
   verticalAlign: 'middle',
