@@ -30,12 +30,13 @@ class Header extends React.Component {
   //     playerOne: "O",
   //   });
   // }
+  // <button style={{margin: 5}} type="button" onClick={     this.updatePlayerX.bind(this) }>Join Game X</button>
+  // <button style={{margin: 5}} type="button" onClick={ this.destroyPlayerO.bind(this) }>Join Game O</button>
 
   render() {
     return (
       <div style={headerStyle}>
-        <button style={{margin: 5}} type="button" onClick={ this.updatePlayerX.bind(this) }>Join Game X</button>
-        <button style={{margin: 5}} type="button" onClick={ this.destroyPlayerO.bind(this) }>Join Game O</button>
+      <p>Tic Tac Toe Header</p>
       </div>
     );
   }
