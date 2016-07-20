@@ -36,21 +36,35 @@ class Grid extends React.Component {
   }
 
   whenClick(index){
-    if (this.state.turn === "X"){
+
+    if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
 
-      console.log(this.gridState.tiles[index]);
+      console.log(this.gridState.tiles[index].content);
 
       this.setState({ turn: "O" });
       console.log(this.state.turn)
     }
-    if (this.state.turn === "O"){
+    if (this.state.turn === "O" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'O',});
 
-      console.log(this.gridState.tiles[index]);
+      console.log(this.gridState.tiles[index].content);
 
       this.setState({ turn: "X" });
       console.log(this.state.turn)
+    }else{
+      //tie?
+    }
+  }
+
+  filled(index){
+    let tile = this.gridState.tiles[index];
+    let empty = {content: ''}
+    if (tile !== empty){
+      console.log('continue');
+      console.log(tile);
+    }else{
+      console.log('make it stop');
     }
   }
 
