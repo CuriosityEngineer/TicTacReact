@@ -9,14 +9,6 @@ const gridStyle = {
   verticalAlign: 'middle',
 };
 
-const buttonStyle = {
-  background: 'yellow',
-  border: 'none !important',
-  fontSize: 50,
-  width: 145,
-  height: 145,
-};
-
 class Grid extends React.Component {
   constructor(){
     super();
@@ -30,60 +22,39 @@ class Grid extends React.Component {
     };
 
     this.state = {
-      turnX: true,
-      turnO: false,
-      isHovering: false,
-      isActive: false
+      turn: "X",
+      content: "something",
     };
   }
 
-//
-// checkPlayer(){
-//   var active = !this.state.turnX;
-//   var active = !this.state.turnO;
-//
-//   if (this.state.turnX === true){
-//     return <button style={buttonStyle}>X</button>
-//     var active = !this.state.turnO;
-//     this.setState({ turnO: active });
-//     // return this.setState({turn: "O"});
-//   }
-//   if (this.state.turnO === true){
-//     return <button style={buttonStyle}>O</button>
-//     this.setState({ turnX: active });
-//     // return this.setState({turn: "X"});
-//   }
-//   // else {
-//   //   return <button style={buttonStyle}>empty</button>
-//   // }
-//   console.log(this.state.turnX);
-// }
+  handleClick(){
+    if (this.state.turn === "X"){
+      // return <button style={buttonStyle}>X</button>
+      this.setState({ turn: "O" });
+      console.log(this.state.turn)
 
-  handleClick () {
-    var active = !this.state.isActive;
-    this.setState({ isActive: active });
-    console.log(this.state.isActive);
+    }
+    if (this.state.turn === "O"){
+      // return <button style={buttonStyle}>O</button>
+      this.setState({ turn: "X" });
+      console.log(this.state.turn)
+
+    }
   }
 
   render() {
     return (
-      <div>
         <div style={gridStyle}>
           { this.gridState.tiles.map(function(tile, index){
             return(
-            // <Tile
-            // key={index}
-            // onClick={this.handleClick.bind(this)}
-            // />
-            <button
+            <Tile
             key={index}
-            style={buttonStyle}
+            content={this.state.content}
             onClick={this.handleClick.bind(this)}
-            ></button>
+            />
             );
           }, this) }
         </div>
-      </div>
     );
   }
 }
