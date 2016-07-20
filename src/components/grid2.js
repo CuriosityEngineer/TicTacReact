@@ -27,20 +27,21 @@ class Grid extends React.Component {
     };
   }
 
-  handleClick(){
+  whenClick(index){
+    console.log(index);
     if (this.state.turn === "X"){
-      // return <button style={buttonStyle}>X</button>
+
       this.setState({ turn: "O" });
       console.log(this.state.turn)
-
     }
     if (this.state.turn === "O"){
-      // return <button style={buttonStyle}>O</button>
+
       this.setState({ turn: "X" });
       console.log(this.state.turn)
-
     }
   }
+
+
 
   render() {
     return (
@@ -50,7 +51,7 @@ class Grid extends React.Component {
             <Tile
             key={index}
             content={this.state.content}
-            onClick={this.handleClick.bind(this)}
+            onClick={this.whenClick.bind(this, index)}
             />
             );
           }, this) }
