@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import _ from 'lodash';
 import Tile from '../components/tile';
 
 const gridStyle = {
@@ -14,10 +15,16 @@ class Grid extends React.Component {
     super();
 
     this.gridState = {
-      tiles:  [
-        '', '', '',
-        '', '', '',
-        '', '', ''
+      tiles:[
+        {content: ''},
+        {content: ''},
+        {content: ''},
+        {content: ''},
+        {content: ''},
+        {content: ''},
+        {content: ''},
+        {content: ''},
+        {content: ''},
       ]
     };
 
@@ -28,13 +35,18 @@ class Grid extends React.Component {
   }
 
   whenClick(index){
-    console.log(index);
     if (this.state.turn === "X"){
+      this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
+
+      console.log(this.gridState.tiles[index]);
 
       this.setState({ turn: "O" });
       console.log(this.state.turn)
     }
     if (this.state.turn === "O"){
+      this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'O',});
+
+      console.log(this.gridState.tiles[index]);
 
       this.setState({ turn: "X" });
       console.log(this.state.turn)
@@ -50,7 +62,7 @@ class Grid extends React.Component {
             return(
             <Tile
             key={index}
-            content={this.state.content}
+            content={this.gridState.tiles[index].content}
             onClick={this.whenClick.bind(this, index)}
             />
             );
