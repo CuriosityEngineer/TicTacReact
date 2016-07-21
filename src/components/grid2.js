@@ -31,14 +31,17 @@ class Grid extends React.Component {
 
     this.state = {
       turn: "X",
-      content: "something",
     };
   }
+
+
 
   whenClick(index){
 
     if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
+
+      this.checkForWinners();
 
       console.log(this.gridState.tiles[index].content);
 
@@ -48,12 +51,14 @@ class Grid extends React.Component {
     if (this.state.turn === "O" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'O',});
 
+      this.checkForWinners();
+
       console.log(this.gridState.tiles[index].content);
 
       this.setState({ turn: "X" });
       console.log(this.state.turn)
     }else{
-      //tie?
+      this.checkForWinners();
     }
   }
 
@@ -65,6 +70,43 @@ class Grid extends React.Component {
       console.log(tile);
     }else{
       console.log('make it stop');
+    }
+  }
+
+  checkForWinners(){
+    let tile = this.gridState.tiles;
+    let icon = this.state.turn;
+    if (tile[0].content === icon && tile[1].content === icon && tile[2].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[3].content === icon && tile[4].content === icon && tile[5].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[6].content === icon && tile[7].content === icon && tile[8].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[0].content === icon && tile[3].content === icon && tile[6].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[1].content === icon && tile[4].content === icon && tile[7].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[2].content === icon && tile[5].content === icon && tile[8].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[0].content === icon && tile[4].content === icon && tile[8].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
+    }
+    if (tile[2].content === icon && tile[4].content === icon && tile[6].content === icon ){
+      // alert('Player' + icon + 'won!')
+      console.log("WON!");
     }
   }
 
