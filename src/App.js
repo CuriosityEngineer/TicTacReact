@@ -1,15 +1,13 @@
 import React from 'react';
 import GameModel from './models/GameModel';
 import Header from './containers/header';
-import Board from './containers/board';
+import Grid2 from './components/grid2';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Tic Tac Toe!</h1>
-        <Header/>
-        <Board/>
+        <Grid2/>
       </div>
     );
   }

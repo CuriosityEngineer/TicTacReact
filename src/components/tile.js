@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const tileStyle = {
-  // display: 'inline-block',
   float: 'left',
   verticalAlign: 'top',
   width: 150,
@@ -24,7 +23,7 @@ class Tile extends React.Component {
       <div style={tileStyle}>
       <button
         style={buttonStyle}
-        onClick={this.props.onClick}
+        onMouseDown={this.props.onMouseDown}
         >
         {this.props.content}
         </button>
