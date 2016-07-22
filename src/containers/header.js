@@ -36,7 +36,11 @@ class Header extends React.Component {
   render() {
     return (
       <div style={headerStyle}>
-      <p>Tic Tac Toe Header</p>
+        <h2>Tic Tac Toe Header</h2>
+        <div>
+          Player {this.props.player}
+        </div>
+
       </div>
     );
   }
