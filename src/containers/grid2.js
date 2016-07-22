@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Tile from '../components/tile';
-import Header from '../containers/header';
+import Header from './header';
 
 const gridStyle = {
   border: '3px solid red',
