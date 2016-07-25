@@ -1,13 +1,12 @@
 import React from 'react';
-import GameModel from './models/GameModel';
-import Header from './containers/header';
-import Grid2 from './containers/grid2';
+import Game from './containers/game';
+
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Grid2/>
+        <Game/>
       </div>
     );
   }

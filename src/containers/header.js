@@ -1,6 +1,7 @@
 import React from 'react';
 import Utils from '../lib/Utils';
 import GameModel from '../models/GameModel';
+import Player from '../components/player';
 
 const headerStyle = {
   border: '3px solid blue',
@@ -48,7 +49,6 @@ class Header extends React.Component {
         <h2>Tic Tac Toe Header</h2>
         <p></p>
         <div>
-          Player {this.props.player}
           <button style={{margin: 5}} type="button" onClick={     this.setPlayerX.bind(this) }>Join Game X</button>
           <button style={{margin: 5}} type="button" onClick={     this.updateGame.bind(this) }>Test</button>
 
