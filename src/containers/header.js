@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Utils from '../lib/Utils';
 import GameModel from '../models/GameModel';
 import Player from '../components/player';
@@ -25,23 +26,29 @@ class Header extends React.Component {
 
     this.state = {
       games: [],
+      // playerOne: "",
+      // playerTwo: "",
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
 
-    console.log(this.modelGame.resources[1].playerOne)
   }
 
   // create new database and calling player one X
   setPlayerX() {
     this.modelGame.addResource({
-      playerOne: "X",
+      playerOne: "O",
     });
   }
 
+  setPlayerO(){
+    // this.setState({playerTwo: "O"});
+    this.modelGame.save(this.modelGame.resources[4], {playerTwo: "O"});
 
+    console.log(this.modelGame.resources[0].playerTwo);
+  }
 
   render() {
     return (
@@ -50,7 +57,7 @@ class Header extends React.Component {
         <p></p>
         <div>
           <button style={{margin: 5}} type="button" onClick={     this.setPlayerX.bind(this) }>Join Game X</button>
-          <button style={{margin: 5}} type="button" onClick={     this.updateGame.bind(this) }>Test</button>
+          <button style={{margin: 5}} type="button" onClick={     this.setPlayerO.bind(this) }>Join Game O</button>
 
         </div>
 
