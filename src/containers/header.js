@@ -1,4 +1,5 @@
 import React from 'react';
+import Utils from '../lib/Utils';
 import GameModel from '../models/GameModel';
 
 const headerStyle = {
@@ -13,32 +14,44 @@ class Header extends React.Component {
   constructor(){
     super();
 
-    this.modelGame = new GameModel();
+    this.utils = new Utils();
 
-      // this.setPlayerX();
-      // this.setPlayerO();
+    this.modelGame = new GameModel();
+    this.modelGame.subscribe(this.updateGame.bind(this));
+    // console.log(this.modelGame);
+
+    // this.setPlayer();
+
+    this.state = {
+      games: [],
+    };
   }
 
-  // setPlayerX() {
-  //   this.modelGame.addResource({
-  //     playerOne: "X",
-  //   });
-  // }
-  //
-  // setPlayerO() {
-  //   this.modelGame.updateResource({
-  //     playerOne: "O",
-  //   });
-  // }
-  // <button style={{margin: 5}} type="button" onClick={     this.updatePlayerX.bind(this) }>Join Game X</button>
-  // <button style={{margin: 5}} type="button" onClick={ this.destroyPlayerO.bind(this) }>Join Game O</button>
+  updateGame() {
+    this.setState({games: this.modelGame.resources});
+
+    console.log(this.modelGame.resources[1].playerOne)
+  }
+
+  // create new database and calling player one X
+  setPlayerX() {
+    this.modelGame.addResource({
+      playerOne: "X",
+    });
+  }
+
+
 
   render() {
     return (
       <div style={headerStyle}>
         <h2>Tic Tac Toe Header</h2>
+        <p></p>
         <div>
           Player {this.props.player}
+          <button style={{margin: 5}} type="button" onClick={     this.setPlayerX.bind(this) }>Join Game X</button>
+          <button style={{margin: 5}} type="button" onClick={     this.updateGame.bind(this) }>Test</button>
+
         </div>
 
       </div>
