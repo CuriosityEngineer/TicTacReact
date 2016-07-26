@@ -13,7 +13,7 @@ class Player extends React.Component {
   render() {
     return (
       <div style={turnStyle}>
-        Player {this.props.player}
+        Player {this.props.player}'s turn!
       </div>
     );
   }
