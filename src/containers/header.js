@@ -20,34 +20,34 @@ class Header extends React.Component {
 
     this.modelGame = new GameModel();
     this.modelGame.subscribe(this.updateGame.bind(this));
-    // console.log(this.modelGame);
-
-    // this.setPlayer();
 
     this.state = {
       games: [],
-      // playerOne: "",
-      // playerTwo: "",
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
-
   }
 
-  // create new database and calling player one X
+  // I am player one X
   setPlayerX() {
-    this.modelGame.addResource({
-      playerOne: "O",
-    });
+    this.modelGame.save(this.modelGame.resources[0], {playerOne: "X"});
   }
 
+  // I am player two O
   setPlayerO(){
-    // this.setState({playerTwo: "O"});
-    this.modelGame.save(this.modelGame.resources[4], {playerTwo: "O"});
+    this.modelGame.save(this.modelGame.resources[0], {playerTwo: "O"});
 
     console.log(this.modelGame.resources[0].playerTwo);
+  }
+
+  // reset the values of the game
+  resetGame(){
+    // delete the old game
+    this.modelGame.destroy(this.modelGame.resources[0]);
+    // create a new game
+    this.modelGame.addResource();
   }
 
   render() {
@@ -57,6 +57,7 @@ class Header extends React.Component {
         <p></p>
         <div>
           <button style={{margin: 5}} type="button" onClick={     this.setPlayerX.bind(this) }>Join Game X</button>
+          <button style={{margin: 5}} type="button" onClick={     this.resetGame.bind(this) }>New</button>
           <button style={{margin: 5}} type="button" onClick={     this.setPlayerO.bind(this) }>Join Game O</button>
 
         </div>
