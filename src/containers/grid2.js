@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Tile from '../components/tile';
+import Player from '../components/player';
 import Header from './header';
 
 const gridStyle = {
@@ -96,7 +97,7 @@ class Grid extends React.Component {
     return (
         <div style={gridStyle}>
           <div>
-            <Header player={this.state.turn}/>
+            <Player player={this.state.turn}/>
           </div>
           { this.gridState.tiles.map(function(tile, index){
             return(
