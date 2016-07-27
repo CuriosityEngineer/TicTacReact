@@ -45,14 +45,19 @@ class Grid extends React.Component {
     };
   }
 
+  setupTiles(){
+    this.modelTile.destroy(this.modelTile.resources);
+    for(var i=0; i<9; i++){
+      this.modelTile.addResource();
+    }
+  }
+
   updateTile() {
     this.setState({tiles: this.modelTile.resources});
   }
 
   whenClickDown(index){
-    console.log(this.modelTile.resources);
-    console.log(this.modelTile.addResource());
-
+    
     if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
 
