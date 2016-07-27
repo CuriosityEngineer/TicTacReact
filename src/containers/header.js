@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Utils from '../lib/Utils';
 import GameModel from '../models/GameModel';
+import TileModel from '../models/TileModel';
 import Grid2 from './grid2';
 import Player from '../components/player';
 
@@ -29,18 +30,19 @@ class Header extends React.Component {
     this.modelGame = new GameModel();
     this.modelGame.subscribe(this.updateGame.bind(this));
 
+    this.modelTile = new TileModel();
+    this.modelTile.subscribe(this.updateGame.bind(this));
+
+
     this.state = {
       games: [],
-      // disabledX: [],
-      // disabledO: [],
+      tiles: [],
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
-    // this.setState({disabledX: this.modelGame.resources[0].disabledX});
-    // this.setState({disabledO: this.modelGame.resources[0].disabledO});
-
+    this.setState({tiles: this.modelTile.resources});
   }
 
   // I am player one X
@@ -85,6 +87,15 @@ class Header extends React.Component {
 
     this.modelGame.save(this.modelGame.resources[0], {disabledX: false});
     this.modelGame.save(this.modelGame.resources[0], {disabledO: false});
+
+    this.setupTiles();
+  }
+
+  setupTiles(){
+    this.modelTile.destroy(this.modelTile.resources);
+    for(var i=0; i<9; i++){
+      this.modelTile.addResource();
+    }
   }
 
   testYo(){

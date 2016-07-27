@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Utils from '../lib/Utils';
 import TileModel from '../models/TileModel';
+import GameModel from '../models/GameModel';
 import Tile from '../components/tile';
 import Player from '../components/player';
 import Header from './header';
@@ -21,43 +22,47 @@ class Grid extends React.Component {
 
     this.utils = new Utils();
 
-    this.modelTile = new TileModel();
-    this.modelTile.subscribe(this.updateTile.bind(this));
+    this.modelGame = new GameModel();
+    this.modelGame.subscribe(this.updateGT.bind(this));
 
-    this.gridState = {
-      // tiles: [],
-      tiles:[
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-      ]
-    };
+    this.modelTile = new TileModel();
+    this.modelTile.subscribe(this.updateGT.bind(this));
+
+    // this.gridState = {
+    //   // tiles: [],
+    //   tiles:[
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //     {content: ''},
+    //   ]
+    // };
 
     this.state = {
-      turn: "X",
-      // winner: false,
+      turn: "",
+      tiles: [],
     };
   }
 
-  setupTiles(){
-    this.modelTile.destroy(this.modelTile.resources);
-    for(var i=0; i<9; i++){
-      this.modelTile.addResource();
-    }
-  }
-
-  updateTile() {
+  updateGT() {
+    this.setState({turn: this.modelGame.resources[0].turn});
     this.setState({tiles: this.modelTile.resources});
   }
 
+  // setupTiles(){
+  //   this.modelTile.destroy(this.modelTile.resources);
+  //   for(var i=0; i<9; i++){
+  //     this.modelTile.addResource();
+  //   }
+  // }
+
   whenClickDown(index){
-    
+
     if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
 
@@ -117,11 +122,16 @@ class Grid extends React.Component {
           <div>
             <Player player={this.state.turn}/>
           </div>
-          { this.gridState.tiles.map(function(tile, index){
+          {this.modelTile.resources.map(function(tile, index){
             return(
+            // <Tile
+            // key={index}
+            // content={this.gridState.tiles[index].content}
+            // onMouseDown={this.whenClickDown.bind(this, index)}
+            // />
             <Tile
             key={index}
-            content={this.gridState.tiles[index].content}
+            content={this.modelTile.resources[index].tile}
             onMouseDown={this.whenClickDown.bind(this, index)}
             />
             );
