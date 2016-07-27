@@ -28,21 +28,6 @@ class Grid extends React.Component {
     this.modelTile = new TileModel();
     this.modelTile.subscribe(this.updateGT.bind(this));
 
-    // this.gridState = {
-    //   // tiles: [],
-    //   tiles:[
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //     {content: ''},
-    //   ]
-    // };
-
     this.state = {
       turn: "",
       tiles: [],
@@ -53,13 +38,6 @@ class Grid extends React.Component {
     this.setState({turn: this.modelGame.resources[0].turn});
     this.setState({tiles: this.modelTile.resources});
   }
-
-  // setupTiles(){
-  //   this.modelTile.destroy(this.modelTile.resources);
-  //   for(var i=0; i<9; i++){
-  //     this.modelTile.addResource();
-  //   }
-  // }
 
   whenClickDown(index){
 

@@ -37,6 +37,7 @@ class Header extends React.Component {
     this.state = {
       games: [],
       tiles: [],
+      currentPlayer: "C",
     };
   }
 
@@ -47,6 +48,12 @@ class Header extends React.Component {
 
   // I am player one X
   setPlayerX() {
+    if (this.state.currentPlayer === "C"){
+      this.setState({currentPlayer: "X"});
+    }else{
+      return alert("You already have chosen your role, " + this.state.currentPlayer);
+    }
+
     this.modelGame.save(this.modelGame.resources[0], {playerOne: "X"});
     setTimeout(() => {
       this.modelGame.save(this.modelGame.resources[0], {disabledX: true});
@@ -56,6 +63,12 @@ class Header extends React.Component {
 
   // I am player two O
   setPlayerO(){
+    if (this.state.currentPlayer === "C"){
+      this.setState({currentPlayer: "O"});
+    }else{
+      return alert("You already have chosen your role: " + this.state.currentPlayer);
+    }
+
     this.modelGame.save(this.modelGame.resources[0], {playerTwo: "O"});
     setTimeout(() => {
       this.modelGame.save(this.modelGame.resources[0], {disabledO: true});
@@ -99,6 +112,9 @@ class Header extends React.Component {
   }
 
   testYo(){
+    // this.setState({currentPlayer: "X"});
+    console.log(this.state.currentPlayer);
+
     console.log(this.modelGame.resources[0].playerOne);
     console.log(this.modelGame.resources[0].playerTwo);
 
