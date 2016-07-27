@@ -1,5 +1,4 @@
 import React from 'react';
-import Game from './containers/game';
 import Header from './containers/header';
 
 

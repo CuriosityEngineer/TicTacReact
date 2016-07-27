@@ -13,6 +13,13 @@ const headerStyle = {
   textAlign: 'center',
 };
 
+const joinStatus = {
+  width: 470,
+  height: 100,
+  textAlign: 'center',
+  paddingTop: 25,
+}
+
 class Header extends React.Component {
   constructor(){
     super();
@@ -56,16 +63,16 @@ class Header extends React.Component {
 
   showGrid(){
     if (this.modelGame.resources[0].disabledX === false && this.modelGame.resources[0].disabledO === true){
-      return "You are player O and waiting for other player"
+      return <div style={joinStatus}>You are player O and waiting for other player</div>
     }
     if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === false){
-      return "You are player X and waiting for other player"
+      return <div style={joinStatus}>You are player X and waiting for other player</div>
     }
     if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === true){
       return <Grid2/>
     }
     else {
-      return "Choose X or O"
+      return <div style={joinStatus}>Choose X or O</div>
     }
   }
 
@@ -82,7 +89,9 @@ class Header extends React.Component {
 
   testYo(){
     console.log(this.modelGame.resources[0].playerOne);
-    // console.log(this.state.disabledX);
+    console.log(this.modelGame.resources[0].playerTwo);
+
+    console.log(this.modelGame.resources[0].disabledX);
     console.log(this.modelGame.resources[0].disabledO);
   }
 
