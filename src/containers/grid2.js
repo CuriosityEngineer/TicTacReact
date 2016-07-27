@@ -20,24 +20,24 @@ class Grid extends React.Component {
   constructor(){
     super();
 
-    this.utils = new Utils();
+    // this.utils = new Utils();
 
-    this.modelGame = new GameModel();
-    this.modelGame.subscribe(this.updateGT.bind(this));
+    // this.modelGame = new GameModel();
+    // this.modelGame.subscribe(this.updateGT.bind(this));
+    //
+    // this.modelTile = new TileModel();
+    // this.modelTile.subscribe(this.updateGT.bind(this));
 
-    this.modelTile = new TileModel();
-    this.modelTile.subscribe(this.updateGT.bind(this));
-
-    this.state = {
-      turn: "",
-      tiles: [],
-    };
+    // this.state = {
+    //   turn: "",
+    //   tiles: [],
+    // };
   }
 
-  updateGT() {
-    this.setState({turn: this.modelGame.resources[0].turn});
-    this.setState({tiles: this.modelTile.resources});
-  }
+  // updateGT() {
+  //   this.setState({turn: this.modelGame.resources[0].turn});
+  //   this.setState({tiles: this.modelTile.resources});
+  // }
 
   whenClickDown(index){
 
@@ -94,13 +94,23 @@ class Grid extends React.Component {
     // console.log(this.state.winner);
   }
 
+  testYo2(){
+    console.log(this.props.tiles);
+    console.log(this.props.turn);
+  }
+
   render() {
     return (
         <div style={gridStyle}>
           <div>
             <Player player={this.state.turn}/>
+            <button
+            style={{margin: 5}}
+            type="button"
+            onClick={this.testYo2.bind(this)}>Test Yo 2!
+            </button>
           </div>
-          {this.modelTile.resources.map(function(tile, index){
+          {this.props.modelTile.map(function(tile, index){
             return(
             // <Tile
             // key={index}
@@ -109,7 +119,7 @@ class Grid extends React.Component {
             // />
             <Tile
             key={index}
-            content={this.modelTile.resources[index].tile}
+            content={this.props.modelTile[index].tile}
             onMouseDown={this.whenClickDown.bind(this, index)}
             />
             );

@@ -38,11 +38,13 @@ class Header extends React.Component {
       games: [],
       tiles: [],
       currentPlayer: "C",
+      // turn: " ",
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
+    // this.setState({turn: this.modelGame.resources[0].turn});
     this.setState({tiles: this.modelTile.resources});
   }
 
@@ -81,7 +83,11 @@ class Header extends React.Component {
       return <div style={joinStatus}>Choose X or O</div>
     }
     if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === true){
-      return <Grid2/>
+      return <Grid2
+        currentP={this.state.currentPlayer}
+        tiles={this.state.tiles}
+        modelTile={this.modelTile.resources}
+        turn={this.modelGame.resources[0].turn}/>
     }
     else {
       if (this.state.currentPlayer === "C"){
@@ -114,6 +120,9 @@ class Header extends React.Component {
 
   testYo(){
     // this.setState({currentPlayer: "X"});
+    // console.log(this.state.tiles);
+    console.log(this.modelGame.resources[0].turn);
+
     console.log(this.state.currentPlayer);
 
     console.log(this.modelGame.resources[0].playerOne);
