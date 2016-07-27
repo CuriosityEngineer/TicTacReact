@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import Utils from '../lib/Utils';
+import TileModel from '../models/TileModel';
 import Tile from '../components/tile';
 import Player from '../components/player';
 import Header from './header';
@@ -17,7 +19,13 @@ class Grid extends React.Component {
   constructor(){
     super();
 
+    this.utils = new Utils();
+
+    this.modelTile = new TileModel();
+    this.modelTile.subscribe(this.updateTile.bind(this));
+
     this.gridState = {
+      // tiles: [],
       tiles:[
         {content: ''},
         {content: ''},
@@ -37,9 +45,14 @@ class Grid extends React.Component {
     };
   }
 
-
+  updateTile() {
+    this.setState({tiles: this.modelTile.resources});
+  }
 
   whenClickDown(index){
+    console.log(this.modelTile.resources);
+    console.log(this.modelTile.addResource());
+
     if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
       this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
 
