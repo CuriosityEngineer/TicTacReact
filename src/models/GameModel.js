@@ -5,6 +5,8 @@ class GameModel extends BaseModel {
     return {
       playerOne: null,
       playerTwo: null,
+      disabledX: false,
+      disabledO: false,
       playerOneMove: null,
       playerTwoMove: null,
       winner: null

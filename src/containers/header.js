@@ -24,39 +24,48 @@ class Header extends React.Component {
 
     this.state = {
       games: [],
-      disabledX: false,
-      disabledO: false,
+      // disabledX: [],
+      // disabledO: [],
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
+    // this.setState({disabledX: this.modelGame.resources[0].disabledX});
+    // this.setState({disabledO: this.modelGame.resources[0].disabledO});
+
   }
 
   // I am player one X
   setPlayerX() {
     this.modelGame.save(this.modelGame.resources[0], {playerOne: "X"});
-    this.setState({disabledX: true});
+    setTimeout(() => {
+      this.modelGame.save(this.modelGame.resources[0], {disabledX: true});
+    }, 50);
+    this.showGrid();
   }
 
   // I am player two O
   setPlayerO(){
     this.modelGame.save(this.modelGame.resources[0], {playerTwo: "O"});
-    console.log(this.state.disabledO);
-    this.setState({disabledO: true});
+    setTimeout(() => {
+      this.modelGame.save(this.modelGame.resources[0], {disabledO: true});
+    }, 50);
     this.showGrid();
-
-    // console.log(this.modelGame.resources[0].playerTwo);
   }
 
   showGrid(){
-
-    let player = this.modelGame.resources[0];
-
-    console.log(player.playerOne);
-
-    if (player.playerOne !== null && player.playerTwo !== null){
+    if (this.modelGame.resources[0].disabledX === false && this.modelGame.resources[0].disabledO === true){
+      return "You are player O and waiting for other player"
+    }
+    if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === false){
+      return "You are player X and waiting for other player"
+    }
+    if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === true){
       return <Grid2/>
+    }
+    else {
+      return "Choose X or O"
     }
   }
 
@@ -67,19 +76,15 @@ class Header extends React.Component {
     // create a new game
     this.modelGame.addResource();
 
-    this.setState({disabledO: false});
-    this.setState({disabledX: false});
+    this.modelGame.save(this.modelGame.resources[0], {disabledX: false});
+    this.modelGame.save(this.modelGame.resources[0], {disabledO: false});
   }
 
-  // joinGame(){
-  //   let player1 = this.modelGame.resources[0].playerOne
-  //   let player2 = this.modelGame.resources[0].playerTwo
-  //
-  //   if (player1 === "X" && player2 === "null"){
-  //     <button style={{margin: 5}} type="button" onClick={     this.setPlayerO.bind(this) }>Join Game O</button>
-  //
-  //   }
-  // }
+  testYo(){
+    console.log(this.modelGame.resources[0].playerOne);
+    // console.log(this.state.disabledX);
+    console.log(this.modelGame.resources[0].disabledO);
+  }
 
   render() {
     return (
@@ -88,9 +93,27 @@ class Header extends React.Component {
         <h2>Tic Tac Toe Header</h2>
         <p></p>
         <div>
-          <button style={{margin: 5}} type="button" onClick={     this.setPlayerX.bind(this) } disabled={this.state.disabledX}>Join Game X</button>
-          <button style={{margin: 5}} type="button" onClick={     this.resetGame.bind(this) }>New</button>
-          <button style={{margin: 5}} type="button" onClick={     this.setPlayerO.bind(this)} disabled={this.state.disabledO}>Join Game O</button>
+          <button
+          style={{margin: 5}}
+          type="button"
+          onClick={this.setPlayerX.bind(this)}
+          disabled={this.modelGame.resources[0].disabledX}>Join Game X
+          </button>
+          <button
+          style={{margin: 5}}
+          type="button"
+          onClick={this.resetGame.bind(this) }>New
+          </button>
+          <button
+          style={{margin: 5}}
+          type="button"
+          onClick={this.setPlayerO.bind(this)} disabled={this.modelGame.resources[0].disabledO}>Join Game O
+          </button>
+          <button
+          style={{margin: 5}}
+          type="button"
+          onClick={this.testYo.bind(this)}>Test Yo!
+          </button>
         </div>
       </div>
       {this.showGrid()}
