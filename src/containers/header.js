@@ -86,7 +86,8 @@ class Header extends React.Component {
       return <Grid2
         currentP={this.state.currentPlayer}
         tiles={this.state.tiles}
-        modelTile={this.modelTile.resources}
+        modelTile={this.modelTile}
+        modelGame={this.modelGame}
         turn={this.modelGame.resources[0].turn}/>
     }
     else {

@@ -41,24 +41,20 @@ class Grid extends React.Component {
 
   whenClickDown(index){
 
-    if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
-      this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
-
-      this.setState({ turn: "O" });
-      console.log(this.state.turn)
+    if (this.props.turn === "X" && this.props.tiles[index].tile === null ){
+      this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "X"});
+      this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "O"});
     }
-    if (this.state.turn === "O" && this.gridState.tiles[index].content === '' ){
-      this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'O',});
-
-      this.setState({ turn: "X" });
-      console.log(this.state.turn);;
+    if (this.props.turn === "O" && this.props.tiles[index].tile === null ){
+      this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "O"});
+      this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "X"});
     }
-    this.checkForWinners();
+    // this.checkForWinners();
   }
 
   checkForWinners(){
-    let tile = this.gridState.tiles;
-    let icon = this.state.turn;
+    let tile = this.props.tiles;
+    let icon = this.props.turn;
     if (tile[0].content === icon && tile[1].content === icon && tile[2].content === icon ){
       console.log("WON!");
       setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
@@ -103,14 +99,14 @@ class Grid extends React.Component {
     return (
         <div style={gridStyle}>
           <div>
-            <Player player={this.state.turn}/>
+            <Player player={this.props.turn}/>
             <button
             style={{margin: 5}}
             type="button"
             onClick={this.testYo2.bind(this)}>Test Yo 2!
             </button>
           </div>
-          {this.props.modelTile.map(function(tile, index){
+          {this.props.modelTile.resources.map(function(tile, index){
             return(
             // <Tile
             // key={index}
@@ -119,7 +115,7 @@ class Grid extends React.Component {
             // />
             <Tile
             key={index}
-            content={this.props.modelTile[index].tile}
+            content={this.props.modelTile.resources[index].tile}
             onMouseDown={this.whenClickDown.bind(this, index)}
             />
             );
