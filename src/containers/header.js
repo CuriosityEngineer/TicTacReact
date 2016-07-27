@@ -77,17 +77,18 @@ class Header extends React.Component {
   }
 
   showGrid(){
-    if (this.modelGame.resources[0].disabledX === false && this.modelGame.resources[0].disabledO === true){
-      return <div style={joinStatus}>You are player O and waiting for other player</div>
-    }
-    if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === false){
-      return <div style={joinStatus}>You are player X and waiting for other player</div>
+    if (this.modelGame.resources[0].disabledX === false && this.modelGame.resources[0].disabledO === false){
+      return <div style={joinStatus}>Choose X or O</div>
     }
     if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === true){
       return <Grid2/>
     }
     else {
-      return <div style={joinStatus}>Choose X or O</div>
+      if (this.state.currentPlayer === "C"){
+        return <div style={joinStatus}>Waiting for a second player.<br/> Join the game!</div>
+      }else{
+        return <div style={joinStatus}>Waiting for a second player.<br/> You are {this.state.currentPlayer}</div>
+      }
     }
   }
 
