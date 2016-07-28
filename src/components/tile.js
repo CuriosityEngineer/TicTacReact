@@ -23,7 +23,7 @@ class Tile extends React.Component {
       <div style={tileStyle}>
       <button
         style={buttonStyle}
-        onMouseDown={this.props.onMouseDown}
+        onClick={this.props.onClick}
         >
         {this.props.content}
         </button>

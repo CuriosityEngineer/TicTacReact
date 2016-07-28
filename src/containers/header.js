@@ -110,6 +110,8 @@ class Header extends React.Component {
     this.modelGame.save(this.modelGame.resources[0], {disabledX: false});
     this.modelGame.save(this.modelGame.resources[0], {disabledO: false});
 
+    this.setState({currentPlayer: "C"});
+
     this.setupTiles();
   }
 

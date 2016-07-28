@@ -19,23 +19,31 @@ const gridStyle = {
 class Grid extends React.Component {
   constructor(){
     super();
+
   }
 
   whenClickDown(index){
-    this.checkForWinners();
+    // console.log(this.props.modelTile.resources[index].tile);
+    // console.log(this.props.turn);
 
     if (this.props.currentP === this.props.turn){
 
       if (this.props.turn === "X" && this.props.modelTile.resources[index].tile === null ){
         this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "X"});
         this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "O"});
-        this.checkForWinners();
+        // this.checkForWinners();
       }
       if (this.props.turn === "O" && this.props.modelTile.resources[index].tile === null ){
         this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "O"});
         this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "X"});
-        this.checkForWinners();
+        // this.checkForWinners();
       }
+      console.log(this.props.modelTile.resources[index].tile);
+      console.log(this.props.modelTile.resources[2].tile);
+      console.log(this.props.turn);
+      // setTimeout(function(){ console.log(this.checkForWinners.bind(this)) }, 100);
+      // this.checkForWinners();
+
     }
   }
 
@@ -80,12 +88,24 @@ class Grid extends React.Component {
 
   testYo2(){
     // console.log(this.props.modelTile.resources);
-    console.log(this.props.modelTile.resources[0].tile);
-    console.log(this.props.modelTile.resources[1].tile);
     console.log(this.props.modelTile.resources[2].tile);
-    // console.log(this.props.turn);
+    console.log(this.props.modelTile.resources[5].tile);
+    console.log(this.props.modelTile.resources[8].tile);
+    console.log(this.props.turn);
+
     // let tile = this.props.modelTile.resources;
     // console.log(tile[2].tile);
+    let tiles = this.props.modelTile.resources;
+    let icon = this.props.turn;
+    if (tiles[2].tile === icon && tiles[5].tile === icon && tiles[8].tile === icon ){
+      console.log("WON!");
+      // alert('Player ' + icon + ' won!')
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
+    }
+  }
+
+  componentWillUpdate(){
+    this.checkForWinners();
   }
 
   render() {
@@ -109,11 +129,10 @@ class Grid extends React.Component {
             <Tile
             key={index}
             content={this.props.modelTile.resources[index].tile}
-            onMouseDown={this.whenClickDown.bind(this, index)}
+            onClick={this.whenClickDown.bind(this, index)}
             />
             );
           }, this) }
-          {this.checkForWinners.bind(this)}
         </div>
     );
   }
