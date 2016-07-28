@@ -19,80 +19,73 @@ const gridStyle = {
 class Grid extends React.Component {
   constructor(){
     super();
-
-    // this.utils = new Utils();
-
-    // this.modelGame = new GameModel();
-    // this.modelGame.subscribe(this.updateGT.bind(this));
-    //
-    // this.modelTile = new TileModel();
-    // this.modelTile.subscribe(this.updateGT.bind(this));
-
-    // this.state = {
-    //   turn: "",
-    //   tiles: [],
-    // };
   }
 
-  // updateGT() {
-  //   this.setState({turn: this.modelGame.resources[0].turn});
-  //   this.setState({tiles: this.modelTile.resources});
-  // }
-
   whenClickDown(index){
+    this.checkForWinners();
 
-    if (this.props.turn === "X" && this.props.tiles[index].tile === null ){
-      this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "X"});
-      this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "O"});
+    if (this.props.currentP === this.props.turn){
+
+      if (this.props.turn === "X" && this.props.modelTile.resources[index].tile === null ){
+        this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "X"});
+        this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "O"});
+        this.checkForWinners();
+      }
+      if (this.props.turn === "O" && this.props.modelTile.resources[index].tile === null ){
+        this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "O"});
+        this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "X"});
+        this.checkForWinners();
+      }
     }
-    if (this.props.turn === "O" && this.props.tiles[index].tile === null ){
-      this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "O"});
-      this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "X"});
-    }
-    // this.checkForWinners();
   }
 
   checkForWinners(){
-    let tile = this.props.tiles;
+    let tiles = this.props.modelTile.resources;
     let icon = this.props.turn;
-    if (tile[0].content === icon && tile[1].content === icon && tile[2].content === icon ){
+    if (tiles[0].tile === icon && tiles[1].tile === icon && tiles[2].tile === icon ){
       console.log("WON!");
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+      // alert('Player ' + icon + ' won!')
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
     }
-    if (tile[3].content === icon && tile[4].content === icon && tile[5].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
-      console.log("WON!");
-    }
-    if (tile[6].content === icon && tile[7].content === icon && tile[8].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[3].tile === icon && tiles[4].tile === icon && tiles[5].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[0].content === icon && tile[3].content === icon && tile[6].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[6].tile === icon && tiles[7].tile === icon && tiles[8].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[1].content === icon && tile[4].content === icon && tile[7].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[0].tile === icon && tiles[3].tile === icon && tiles[6].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[2].content === icon && tile[5].content === icon && tile[8].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[1].tile === icon && tiles[4].tile === icon && tiles[7].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[0].content === icon && tile[4].content === icon && tile[8].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[2].tile === icon && tiles[5].tile === icon && tiles[8].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[2].content === icon && tile[4].content === icon && tile[6].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[0].tile === icon && tiles[4].tile === icon && tiles[8].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
+      console.log("WON!");
+    }
+    if (tiles[2].tile === icon && tiles[4].tile === icon && tiles[6].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
     // console.log(this.state.winner);
   }
 
   testYo2(){
-    console.log(this.props.tiles);
-    console.log(this.props.turn);
+    // console.log(this.props.modelTile.resources);
+    console.log(this.props.modelTile.resources[0].tile);
+    console.log(this.props.modelTile.resources[1].tile);
+    console.log(this.props.modelTile.resources[2].tile);
+    // console.log(this.props.turn);
+    // let tile = this.props.modelTile.resources;
+    // console.log(tile[2].tile);
   }
 
   render() {
@@ -120,6 +113,7 @@ class Grid extends React.Component {
             />
             );
           }, this) }
+          {this.checkForWinners.bind(this)}
         </div>
     );
   }

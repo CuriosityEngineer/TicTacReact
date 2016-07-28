@@ -85,10 +85,11 @@ class Header extends React.Component {
     if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === true){
       return <Grid2
         currentP={this.state.currentPlayer}
-        tiles={this.state.tiles}
+        tiles={this.modelTile.resources.tiles}
         modelTile={this.modelTile}
         modelGame={this.modelGame}
-        turn={this.modelGame.resources[0].turn}/>
+        turn={this.modelGame.resources[0].turn}
+        reset={this.resetGame}/>
     }
     else {
       if (this.state.currentPlayer === "C"){
