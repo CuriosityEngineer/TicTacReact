@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import Utils from '../lib/Utils';
+import TileModel from '../models/TileModel';
+import GameModel from '../models/GameModel';
 import Tile from '../components/tile';
 import Player from '../components/player';
 import Header from './header';
@@ -16,98 +19,101 @@ const gridStyle = {
 class Grid extends React.Component {
   constructor(){
     super();
-
-    this.gridState = {
-      tiles:[
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-        {content: ''},
-      ]
-    };
-
-    this.state = {
-      turn: "X",
-      // winner: false,
-    };
   }
 
-
-
   whenClickDown(index){
-    if (this.state.turn === "X" && this.gridState.tiles[index].content === '' ){
-      this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'X',});
-
-      this.setState({ turn: "O" });
-      console.log(this.state.turn)
-    }
-    if (this.state.turn === "O" && this.gridState.tiles[index].content === '' ){
-      this.gridState.tiles[index]  = _.assign(this.gridState.tiles[index], {content: 'O',});
-
-      this.setState({ turn: "X" });
-      console.log(this.state.turn);;
-    }
     this.checkForWinners();
+
+    if (this.props.currentP === this.props.turn){
+
+      if (this.props.turn === "X" && this.props.modelTile.resources[index].tile === null ){
+        this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "X"});
+        this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "O"});
+        this.checkForWinners();
+      }
+      if (this.props.turn === "O" && this.props.modelTile.resources[index].tile === null ){
+        this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "O"});
+        this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "X"});
+        this.checkForWinners();
+      }
+    }
   }
 
   checkForWinners(){
-    let tile = this.gridState.tiles;
-    let icon = this.state.turn;
-    if (tile[0].content === icon && tile[1].content === icon && tile[2].content === icon ){
+    let tiles = this.props.modelTile.resources;
+    let icon = this.props.turn;
+    if (tiles[0].tile === icon && tiles[1].tile === icon && tiles[2].tile === icon ){
       console.log("WON!");
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+      // alert('Player ' + icon + ' won!')
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
     }
-    if (tile[3].content === icon && tile[4].content === icon && tile[5].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
-      console.log("WON!");
-    }
-    if (tile[6].content === icon && tile[7].content === icon && tile[8].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[3].tile === icon && tiles[4].tile === icon && tiles[5].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[0].content === icon && tile[3].content === icon && tile[6].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[6].tile === icon && tiles[7].tile === icon && tiles[8].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[1].content === icon && tile[4].content === icon && tile[7].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[0].tile === icon && tiles[3].tile === icon && tiles[6].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[2].content === icon && tile[5].content === icon && tile[8].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[1].tile === icon && tiles[4].tile === icon && tiles[7].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[0].content === icon && tile[4].content === icon && tile[8].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[2].tile === icon && tiles[5].tile === icon && tiles[8].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
-    if (tile[2].content === icon && tile[4].content === icon && tile[6].content === icon ){
-      setTimeout(function(){ alert('Player ' + icon + ' won!') }, 100);
+    if (tiles[0].tile === icon && tiles[4].tile === icon && tiles[8].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
+      console.log("WON!");
+    }
+    if (tiles[2].tile === icon && tiles[4].tile === icon && tiles[6].tile === icon ){
+      // setTimeout(function(){ alert('Player ' + icon + ' won!') }, 20);
       console.log("WON!");
     }
     // console.log(this.state.winner);
+  }
+
+  testYo2(){
+    // console.log(this.props.modelTile.resources);
+    console.log(this.props.modelTile.resources[0].tile);
+    console.log(this.props.modelTile.resources[1].tile);
+    console.log(this.props.modelTile.resources[2].tile);
+    // console.log(this.props.turn);
+    // let tile = this.props.modelTile.resources;
+    // console.log(tile[2].tile);
   }
 
   render() {
     return (
         <div style={gridStyle}>
           <div>
-            <Player player={this.state.turn}/>
+            <Player player={this.props.turn}/>
+            <button
+            style={{margin: 5}}
+            type="button"
+            onClick={this.testYo2.bind(this)}>Test Yo 2!
+            </button>
           </div>
-          { this.gridState.tiles.map(function(tile, index){
+          {this.props.modelTile.resources.map(function(tile, index){
             return(
+            // <Tile
+            // key={index}
+            // content={this.gridState.tiles[index].content}
+            // onMouseDown={this.whenClickDown.bind(this, index)}
+            // />
             <Tile
             key={index}
-            content={this.gridState.tiles[index].content}
+            content={this.props.modelTile.resources[index].tile}
             onMouseDown={this.whenClickDown.bind(this, index)}
             />
             );
           }, this) }
+          {this.checkForWinners.bind(this)}
         </div>
     );
   }
