@@ -4,17 +4,17 @@ import ReactDOM from 'react-dom';
 const tileStyle = {
   float: 'left',
   verticalAlign: 'top',
-  width: 150,
-  height: 150,
+  width: 125,
+  height: 125,
   border: '3px solid #73AD21',
 };
 
 const buttonStyle = {
-  background: 'yellow',
+  background: 'transparent',
   border: 'none !important',
   fontSize: 20,
-  width: 145,
-  height: 145,
+  width: 120,
+  height: 120,
 };
 
 class Tile extends React.Component {

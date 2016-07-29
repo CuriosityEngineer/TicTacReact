@@ -8,13 +8,24 @@ import Tile from '../components/tile';
 import Player from '../components/player';
 import Header from './header';
 
+const bgStyle = {
+    border: '3px solid blue',
+    backgroundImage: "url('http://nightowlpapergoods.com/images/D/square-5x5-cherry-print-your-own-wood-d.jpg')",
+    backgroundSize: "contain",
+    width: 650,
+    height: 650,
+}
+
 const gridStyle = {
   border: '3px solid red',
   overflow:'hidden',
-  width: 470,
   textAlign: 'center',
   verticalAlign: 'middle',
+  width: 400,
+  marginTop: 30,
+  marginLeft: 125,
 };
+
 
 class Grid extends React.Component {
   constructor(){
@@ -99,7 +110,10 @@ class Grid extends React.Component {
 
   render() {
     return (
+      <div style={bgStyle}>
         <div style={gridStyle}>
+
+
           <div>
             <Player player={this.props.turn}/>
             <button
@@ -108,13 +122,9 @@ class Grid extends React.Component {
             onClick={this.testYo2.bind(this)}>Test Yo 2!
             </button>
           </div>
+
           {this.props.modelTile.resources.map(function(tile, index){
             return(
-            // <Tile
-            // key={index}
-            // content={this.gridState.tiles[index].content}
-            // onMouseDown={this.whenClickDown.bind(this, index)}
-            // />
             <Tile
             key={index}
             content={this.props.modelTile.resources[index].tile}
@@ -123,6 +133,8 @@ class Grid extends React.Component {
             />
             );
           }, this) }
+
+          </div>
         </div>
     );
   }
