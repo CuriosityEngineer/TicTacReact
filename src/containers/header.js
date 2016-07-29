@@ -38,13 +38,11 @@ class Header extends React.Component {
       games: [],
       tiles: [],
       currentPlayer: "C",
-      // turn: " ",
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
-    // this.setState({turn: this.modelGame.resources[0].turn});
     this.setState({tiles: this.modelTile.resources});
   }
 
@@ -111,6 +109,7 @@ class Header extends React.Component {
     this.modelGame.save(this.modelGame.resources[0], {disabledO: false});
 
     this.setState({currentPlayer: "C"});
+    // reload or refresh page
 
     this.setupTiles();
   }
