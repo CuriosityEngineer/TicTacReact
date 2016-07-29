@@ -18,6 +18,11 @@ const buttonStyle = {
 };
 
 class Tile extends React.Component {
+
+  // this.props.content is x of o
+  // with this info 
+
+
   render() {
     return (
       <div style={tileStyle}>
