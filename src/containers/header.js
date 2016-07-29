@@ -8,7 +8,7 @@ import Player from '../components/player';
 
 const headerStyle = {
   border: '3px solid blue',
-  width: 470,
+  width: 650,
   height: 100,
   paddingTop: 25,
   textAlign: 'center',
@@ -38,44 +38,44 @@ class Header extends React.Component {
       games: [],
       tiles: [],
       currentPlayer: "C",
-      // turn: " ",
     };
   }
 
   updateGame() {
     this.setState({games: this.modelGame.resources});
-    // this.setState({turn: this.modelGame.resources[0].turn});
     this.setState({tiles: this.modelTile.resources});
   }
 
   // I am player one X
   setPlayerX() {
-    if (this.state.currentPlayer === "C"){
-      this.setState({currentPlayer: "X"});
-    }else{
-      return alert("You already have chosen your role, " + this.state.currentPlayer);
-    }
 
     this.modelGame.save(this.modelGame.resources[0], {playerOne: "X"});
     setTimeout(() => {
       this.modelGame.save(this.modelGame.resources[0], {disabledX: true});
     }, 50);
     this.showGrid();
+
+    if (this.state.currentPlayer === "C"){
+      this.setState({currentPlayer: "X"});
+    }else{
+      return alert("You already have chosen your role, " + this.state.currentPlayer);
+    }
   }
 
   // I am player two O
   setPlayerO(){
-    if (this.state.currentPlayer === "C"){
-      this.setState({currentPlayer: "O"});
-    }else{
-      return alert("You already have chosen your role: " + this.state.currentPlayer);
-    }
 
     this.modelGame.save(this.modelGame.resources[0], {playerTwo: "O"});
     setTimeout(() => {
       this.modelGame.save(this.modelGame.resources[0], {disabledO: true});
     }, 50);
     this.showGrid();
+
+    if (this.state.currentPlayer === "C"){
+      this.setState({currentPlayer: "O"});
+    }else{
+      return alert("You already have chosen your role: " + this.state.currentPlayer);
+    }
   }
 
   showGrid(){
@@ -109,6 +109,9 @@ class Header extends React.Component {
 
     this.modelGame.save(this.modelGame.resources[0], {disabledX: false});
     this.modelGame.save(this.modelGame.resources[0], {disabledO: false});
+
+    this.setState({currentPlayer: "C"});
+
 
     this.setupTiles();
   }

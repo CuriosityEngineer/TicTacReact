@@ -4,9 +4,8 @@ const turnStyle = {
   border: '3px solid purple',
   overflow:'hidden',
   paddingTop: 20,
-  width: 470,
+  width: 400,
   height: 40,
-  textAlign: 'center',
 };
 
 class Player extends React.Component {
