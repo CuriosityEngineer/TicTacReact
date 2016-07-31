@@ -9,7 +9,7 @@ import Player from '../components/player';
 import Header from './header';
 
 const bgStyle = {
-    border: '3px solid blue',
+    border: '3px solid transparent',
     backgroundImage: "url('http://nightowlpapergoods.com/images/D/square-5x5-cherry-print-your-own-wood-d.jpg')",
     backgroundSize: "contain",
     width: 650,
@@ -17,12 +17,12 @@ const bgStyle = {
 }
 
 const gridStyle = {
-  border: '3px solid red',
+  border: '3px solid transparent',
   overflow:'hidden',
   textAlign: 'center',
   verticalAlign: 'middle',
   width: 400,
-  marginTop: 30,
+  marginTop: 60,
   marginLeft: 125,
 };
 
@@ -45,9 +45,6 @@ class Grid extends React.Component {
         this.props.modelTile.save(this.props.modelTile.resources[index], {tile: "O"});
         this.props.modelGame.save(this.props.modelGame.resources[0], {turn: "X"});
       }
-      // console.log(this.props.modelTile.resources[index].tile);
-      // console.log(this.props.modelTile.resources[2].tile);
-      // console.log(this.props.turn);
     }
   }
 
@@ -88,13 +85,6 @@ class Grid extends React.Component {
     }
   }
 
-  testYo2(){
-    console.log(this.props.modelTile.resources[2].tile);
-    console.log(this.props.modelTile.resources[5].tile);
-    console.log(this.props.modelTile.resources[8].tile);
-    console.log(this.props.turn);
-  }
-
   componentDidUpdate(prevProps, prevState){;
 
     console.log(prevProps);
@@ -116,11 +106,6 @@ class Grid extends React.Component {
 
           <div>
             <Player player={this.props.turn}/>
-            <button
-            style={{margin: 5}}
-            type="button"
-            onClick={this.testYo2.bind(this)}>Test Yo 2!
-            </button>
           </div>
 
           {this.props.modelTile.resources.map(function(tile, index){
@@ -133,7 +118,6 @@ class Grid extends React.Component {
             />
             );
           }, this) }
-
           </div>
         </div>
     );

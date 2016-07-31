@@ -1,7 +1,7 @@
 import React from 'react';
 
 const turnStyle = {
-  border: '3px solid purple',
+  border: '3px solid transparent',
   overflow:'hidden',
   paddingTop: 20,
   width: 400,

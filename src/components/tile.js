@@ -6,7 +6,7 @@ const tileStyle = {
   verticalAlign: 'top',
   width: 125,
   height: 125,
-  border: '3px solid #73AD21',
+  border: '3px solid transparent',
 };
 
 const buttonStyle = {
@@ -18,6 +18,19 @@ const buttonStyle = {
 };
 
 class Tile extends React.Component {
+  constructor(){
+    super();
+  }
+
+  bgInsect(){
+    if (this.props.content === "X"){
+      return (<img src={"https://s31.postimg.org/r2gbiwezb/blue_Insect01b.png"} height="100"/>);
+    }
+    if (this.props.content === "O"){
+      return (<img src={"https://s31.postimg.org/o9n3yvemv/gold_Insect01b.png"} height="100"/>);
+    }
+  }
+
   render() {
     return (
       <div style={tileStyle}>
@@ -25,7 +38,8 @@ class Tile extends React.Component {
         style={buttonStyle}
         onClick={this.props.onClick}
         >
-        {this.props.content}
+        {this.bgInsect()}
+
         </button>
       </div>
     );
