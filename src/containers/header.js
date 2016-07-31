@@ -7,7 +7,7 @@ import Grid2 from './grid2';
 import Player from '../components/player';
 
 const headerStyle = {
-  border: '3px solid blue',
+  border: '3px solid transparent',
   width: 650,
   height: 100,
   paddingTop: 25,
@@ -141,8 +141,7 @@ class Header extends React.Component {
     return (
       <div>
       <div style={headerStyle}>
-        <h2>Tic Tac Toe Header</h2>
-        <p></p>
+        <h2>Tic Tac Insect</h2>
         <div>
           <button
           style={{margin: 5}}
@@ -159,11 +158,6 @@ class Header extends React.Component {
           style={{margin: 5}}
           type="button"
           onClick={this.setPlayerO.bind(this)} disabled={this.modelGame.resources[0].disabledO}>Join Game O
-          </button>
-          <button
-          style={{margin: 5}}
-          type="button"
-          onClick={this.testYo.bind(this)}>Test Yo!
           </button>
         </div>
       </div>
