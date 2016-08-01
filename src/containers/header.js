@@ -33,7 +33,6 @@ class Header extends React.Component {
     this.modelTile = new TileModel();
     this.modelTile.subscribe(this.updateGame.bind(this));
 
-
     this.state = {
       games: [],
       tiles: [],
@@ -42,6 +41,7 @@ class Header extends React.Component {
   }
 
   updateGame() {
+    console.log("Why 4 times?");
     this.setState({games: this.modelGame.resources});
     this.setState({tiles: this.modelTile.resources});
   }
@@ -79,10 +79,12 @@ class Header extends React.Component {
   }
 
   showGrid(){
-    if (this.modelGame.resources[0].disabledX === false && this.modelGame.resources[0].disabledO === false){
+    let resourceX = this.modelGame.resources[0].disabledX
+    let resourceO = this.modelGame.resources[0].disabledO
+    if (resourceX === false && resourceO === false){
       return <div style={joinStatus}>Choose X or O</div>
     }
-    if (this.modelGame.resources[0].disabledX === true && this.modelGame.resources[0].disabledO === true){
+    if (resourceX === true && resourceO === true){
       return <Grid2
         currentP={this.state.currentPlayer}
         tiles={this.modelTile.resources.tiles}
@@ -124,14 +126,10 @@ class Header extends React.Component {
   }
 
   testYo(){
-    // this.setState({currentPlayer: "X"});
-    // console.log(this.state.tiles);
+
     console.log(this.modelGame.resources[0].turn);
 
     console.log(this.state.currentPlayer);
-
-    console.log(this.modelGame.resources[0].playerOne);
-    console.log(this.modelGame.resources[0].playerTwo);
 
     console.log(this.modelGame.resources[0].disabledX);
     console.log(this.modelGame.resources[0].disabledO);
@@ -143,6 +141,11 @@ class Header extends React.Component {
       <div style={headerStyle}>
         <h2>Tic Tac Insect</h2>
         <div>
+          <button
+          style={{margin: 5}}
+          type="button"
+          onClick={this.testYo.bind(this)}>testing stuffz
+          </button>
           <button
           style={{margin: 5}}
           type="button"
@@ -161,6 +164,7 @@ class Header extends React.Component {
           </button>
         </div>
       </div>
+      {console.log(this.modelGame.resources[0].turn)}
       {this.showGrid()}
       </div>
     );

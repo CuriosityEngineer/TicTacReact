@@ -93,7 +93,7 @@ class Grid extends React.Component {
     this.checkForWinners();
       // now the problem of 2 alerts instead of one
       // componentDidUpdate runs every change in state
-      // and props after render
+      // and props after r
 
       // how to get it to run only once
   }
